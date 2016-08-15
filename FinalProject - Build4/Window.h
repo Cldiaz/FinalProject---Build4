@@ -2,13 +2,14 @@
 #include <string>
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
-/********************************************************************************************************************/
-/*												Window Class Header													*/
-/* Since every game needs to have a window, is useful to have a class.												*/
-/* Methods needed include being able to create, destroy, process events, draw,										*/
-/* clear the screen and update itself to show anything drawn after the screen was cleared							*/
-/* It's also usefull to keep track whether the window is being closed and if it's in full-screen mode.				*/
-/********************************************************************************************************************/
+
+/*
+----- Window Class Header -----
+Since every game needs to have a window, is useful to have a class.
+Methods needed include being able to create, destroy, process events, draw,
+clear the screen and update itself to show anything drawn after the screen was cleared
+It's also usefull to keep track whether the window is being closed and if it's in full-screen mode.
+*/
 class Window {
 public:
 	//Default constructor

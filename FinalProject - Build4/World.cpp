@@ -1,17 +1,17 @@
 #include "World.h"
 
-/********************************************************************************************************************/
-/*											World Class Functions													*/
-/* The world is where the snake moves, it includes the boundaries to where the snake can go	and is responsible		*/
-/* of respawning the applePosition.																					*/
-/********************************************************************************************************************/
+/*
+----- World Class Functions -----
+The world is where the snake moves, it includes the boundaries to where the snake can goand is responsible
+of respawning the applePosition.
+*/
 
-/****************************************************/
-/* Constructor										*/
-/* Takes a vector of two unsigned integers as an	*/
-/* argument which represent the window size.		*/
-/* 	@param windSize  Size of the window				*/
-/****************************************************/
+/*
+----- Constructor -----
+Takes a vector of two unsigned integers as an
+argument which represent the window size.
+@param windSize  Size of the window
+*/
 World::World(sf::Vector2u windSize) {
 	bgTexture.loadFromFile("black-bg.png");
 	bgSprite.setTexture(bgTexture);
@@ -23,11 +23,11 @@ World::World(sf::Vector2u windSize) {
 
 	appleShape.setFillColor(sf::Color::Red);//Set the color of the applePosition
 	appleShape.setRadius(blockSize / 2);//Set the radius of the applePosition
-										//Loop 4 times, number of boundaries
+	//Loop 4 times, number of boundaries
 	for (int i = 0; i < 4; ++i) {
 		bounds[i].setFillColor(sf::Color(150, 0, 0));//Set the color of rectangle
 
-													 //Determine if the i is even or odd, to know how big each "wall" has to be on a specific axis
+		//Determine if the i is even or odd, to know how big each "wall" has to be on a specific axis
 		if (!((i + 1) % 2)) {//even
 							 //Set the size of the rectangle to the size of the windows in x axis and height of the block size
 			bounds[i].setSize(sf::Vector2f(windowSize.x, blockSize));
@@ -47,18 +47,23 @@ World::World(sf::Vector2u windSize) {
 		}
 	}
 }
-/****************************************************/
-/* Deconstructor									*/
-/****************************************************/
+
+/*
+----- Deconstructor -----
+*/
 World::~World() {}
 
+/*
+----- GetBlockSize Function -----
+@return blockSize  The block size
+*/
 int World::GetBlockSize() { return blockSize; }
 
-/****************************************************/
-/* RespawnApple	Function							*/
-/* Responsible of respawning the applePosition		*/
-/* inside the boundaries.							*/
-/****************************************************/
+/*
+----- RespawnApple	Function -----
+Responsible of respawning the applePosition
+inside the boundaries.
+*/
 void World::RespawnApple() {
 	//Get the maximum value in the x axis, size of the window in x divided by block size (number of spaces in grid) minus 2 (two block of boundaries)
 	int maxX = (windowSize.x / blockSize) - 2;
@@ -71,12 +76,12 @@ void World::RespawnApple() {
 	appleSprite.setPosition(applePosition.x * blockSize, applePosition.y * blockSize);
 }
 
-/****************************************************/
-/* Update Function									*/
-/* Check if snake position is the same as			*/
-/* applePosition position or if snake hit wall		*/
-/* @param player  Reference to the snake object		*/
-/****************************************************/
+/*
+----- Update Function -----
+Check if snake position is the same as
+applePosition position or if snake hit wall
+@param player  Reference to the snake object
+*/
 void World::Update(Snake& player) {
 	//If snake position is the same as the position of the applePosition
 	if (player.GetPosition() == applePosition) {
@@ -98,12 +103,11 @@ void World::Update(Snake& player) {
 	}
 }
 
-/****************************************************/
-/* Render Function									*/
-/* Render applePosition and boundaries in window	*/
-/* applePosition position or if snake hit wall		*/
-/* @param window  Reference to the window object	*/
-/****************************************************/
+/*
+----- Update Function -----
+Render applePosition and boundaries in window
+@param window  Reference to the window object
+*/
 void World::Render(sf::RenderWindow& window) {
 
 	window.draw(bgSprite);

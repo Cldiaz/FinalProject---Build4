@@ -1,45 +1,45 @@
 #include "Window.h"
-/********************************************************************************************************************/
-/*												Window Class Functions												*/
-/* Since every game needs to have a window, is useful to have a class.												*/
-/* Functions needed include being able to create, destroy, process events, draw,									*/
-/* clear the screen and update itself to show anything drawn after the screen was cleared							*/
-/* It's also usefull to keep track whether the window is being closed and if it's in full-screen mode.				*/
-/* Additional methods would include a way to toggle full screen.													*/
-/********************************************************************************************************************/
 
-/****************************************************/
-/* Default Constructor								*/
-/****************************************************/
+/*
+----- Window Class Functions -----
+Since every game needs to have a window, is useful to have a class.
+Methods needed include being able to create, destroy, process events, draw,
+clear the screen and update itself to show anything drawn after the screen was cleared
+It's also usefull to keep track whether the window is being closed and if it's in full-screen mode.
+*/
+
+/*
+----- Default Constructor -----
+*/
 Window::Window() {
 	//Call Setup function
 	Setup("Window", sf::Vector2u(640, 480));
 }
 
-/****************************************************/
-/* Constructor										*/
-/* @param title  Title of the window				*/
-/* @param size 	 Size of the window					*/
-/****************************************************/
+/*
+----- Constructor -----
+@param title  Title of the window
+@param size  Size of the window
+*/
 Window::Window(const std::string& title, const sf::Vector2u& size) {
 	//Call Setup function
 	Setup(title, size);
 }
 
-/****************************************************/
-/* Deconstructor									*/
-/****************************************************/
+/*
+----- Deconstructor -----
+*/
 Window::~Window() {
 	//Call Destroy function
 	Destroy();
 }
 
-/****************************************************/
-/* Setup Function									*/
-/* Intitialize Window class properties				*/
-/* @param title  Title of the window				*/
-/* @param size 	 Size of the window					*/
-/****************************************************/
+/*
+----- Setup Function -----
+Intitialize Window class properties
+@param title  Title of the window
+@param size  Size of the window
+*/
 void Window::Setup(const std::string title, const sf::Vector2u& size) {
 	windowTitle = title;//Assign the title of the window
 	windowSize = size;//Assign the size of the window
@@ -48,10 +48,10 @@ void Window::Setup(const std::string title, const sf::Vector2u& size) {
 	Create();//Call Create function
 }
 
-/****************************************************/
-/* Create Function									*/
-/* Create a window, assign style to window			*/
-/****************************************************/
+/*
+----- Create Function -----
+Create a window, assign style to window
+*/
 void Window::Create() {
 	//sf::Uint32 to hold the current style of the window
 	auto style = (isFullscreen ? sf::Style::Fullscreen : sf::Style::Default);
@@ -59,64 +59,64 @@ void Window::Create() {
 	window.create({ windowSize.x, windowSize.y, 32 }, windowTitle, style);
 }
 
-/****************************************************/
-/* Destroy Function									*/
-/* Close the window									*/
-/****************************************************/
+/*
+----- Destroy Function -----
+Close the window
+*/
 void Window::Destroy() {
 	window.close();
 }
 
-/****************************************************/
-/* BeginDraw Function								*/
-/* Clear the window before starting drawing			*/
-/****************************************************/
+/*
+----- BeginDraw Function -----
+Clear the window before starting drawing
+*/
 void Window::BeginDraw() {
 	window.clear(sf::Color::Black);
 }
 
-/****************************************************/
-/* EndDraw Function									*/
-/* Display the window now that we have draw			*/
-/****************************************************/
+/*
+----- EndDraw Function -----
+Display the window now that we have drawn
+*/
 void Window::EndDraw() {
-	/*bgTexture.loadFromFile("bg.png");
-	bgSprite.setTexture(bgTexture);
-	window.draw(bgSprite);*/
 	window.display();
 }
 
-/****************************************************/
-/* IsDone Function									*/
-/* Return if the window has been closed				*/
-/****************************************************/
+/*
+----- IsDone Function -----
+@return isDone  Return if the window has been closed
+*/
 bool Window::IsDone() {
 	return isDone;
 }
 
-/****************************************************/
-/* IsFullscreen Function							*/
-/* Return if the window is fullscreen				*/
-/****************************************************/
+/*
+----- IsFullscreen Function -----
+@return isFullscreen  Return if the window is fullscreen
+*/
 bool Window::IsFullscreen() {
 	return isFullscreen;
 }
 
+/*
+----- GetRenderWindow Function -----
+@return window  Return the reference of the window
+*/
 sf::RenderWindow* Window::GetRenderWindow() { return &window; }
 
-/****************************************************/
-/* GetWindowSize Function							*/
-/* Return the window size							*/
-/* @return Size of window							*/
-/****************************************************/
+/*
+----- GetWindowSize Function -----
+@return windowSize  Return the window size
+*/
 sf::Vector2u Window::GetWindowSize() {
 	return windowSize;
 }
 
-/****************************************************/
-/* ToggleFullscreen Function						*/
-/* Toggle fullscreen option of the window			*/
-/****************************************************/
+/*
+----- ToggleFullscreen Function -----
+Toggle fullscreen option of the window
+*/
 void Window::ToggleFullscreen() {
 	//Toggle isFullscreen boolean
 	isFullscreen = !isFullscreen;
@@ -126,12 +126,12 @@ void Window::ToggleFullscreen() {
 	Create();
 }
 
-/****************************************************/
-/* Update Function									*/
-/* Handle events of the window, for now, check if	*/
-/* close button has been clicked or					*/
-/* F5 has been pressed								*/
-/****************************************************/
+/*
+----- Update Function -----
+Handle events of the window, for now, check if
+close button has been clicked or
+F5 has been pressed
+*/
 void Window::Update() {
 	sf::Event event;
 	//Lopp to check any events on our windows

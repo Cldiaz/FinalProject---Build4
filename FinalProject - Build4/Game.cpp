@@ -1,20 +1,21 @@
 #include "Game.h"
 
-/********************************************************************************************************************/
-/*												Game Class Functions												*/
-/* Game loop content includes processing input, updating the game world and the player and rendering				*/
-/* everything on the screen. This class will help to roganize and refractor all these processes.					*/
-/* The class holds an instance of Window class, Snake oject	and World object										*/
-/********************************************************************************************************************/
 
-/****************************************************/
-/* Default Constructor								*/
-/* Setup the window and graphics.					*/
-/* Setting up class members							*/
-/* NOTE: Use of initialization list in constructor	*/
-/* is needed to	initialize the Window object,		*/
-/* snake object, and world object.					*/
-/****************************************************/
+/*
+----- Game Class Header -----
+Game loop content includes processing input, updating the game world and the player and rendering
+everything on the screen. This class will help to roganize and refractor all these processes.
+The class holds an instance of Window class, Snake oject	and World object
+*/
+
+/*
+----- Default Constructor -----
+Setup the window and graphics.
+Setting up class members
+NOTE: Use of initialization list in constructor
+is needed to initialize the Window object,
+snake object, and world object.
+*/
 Game::Game() : window("Snake Game", sf::Vector2u(800, 600)),
 snake(world.GetBlockSize(), &textbox),
 world(sf::Vector2u(800, 600))
@@ -29,37 +30,41 @@ world(sf::Vector2u(800, 600))
 	textbox.Add("Seeded random number generator with: " + std::to_string(time(nullptr)));
 }
 
-/****************************************************/
-/* Deconstructor									*/
-/****************************************************/
+/*
+----- Deconstructor -----
+*/
 Game::~Game() {}
 
-/****************************************************/
-/* GetElapsed Function								*/
-/* Return the elapsed time since the last instance	*/
-/* of the clock being restarted						*/
-/* or since its creation							*/
-/****************************************************/
+/*
+----- GetElapsed Function -----
+Return the elapsed time since the last instance
+of the clock being restarted
+or since its creation
+*/
 sf::Time Game::GetElapsed() {
 	return clock.getElapsedTime();
 }
 
-/****************************************************/
-/* RestartClock Function							*/
-/****************************************************/
+/*
+----- RestartClock Function -----
+*/
 void Game::RestartClock() {
 	elapsedTime += clock.restart().asSeconds();
 }
 
+/*
+----- GetWindow Function -----
+@return Reference to the window
+*/
 Window* Game::GetWindow() {
 	return &window;
 }
 
-/****************************************************/
-/* HandleInput Function								*/
-/* Handle input of the player to change				*/
-/* direction of snake								*/
-/****************************************************/
+/*
+----- HandleInput Function -----
+Handle input of the player to change
+direction of snake
+*/
 void Game::HandleInput() {
 	// Input handling for the arrow keys pressed, also check the player does not try to go opposite direction
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)
@@ -79,9 +84,11 @@ void Game::HandleInput() {
 		snake.SetDirection(Direction::Right);
 	}
 }
-/****************************************************/
-/* Update Function									*/
-/****************************************************/
+
+/*
+----- Update Function -----
+Update the game
+*/
 void Game::Update() {
 	window.Update();
 	float timestep = 1.0f / snake.GetSpeed();//Fixed time-step with the speed of the snake in order to update the apporpiate amount of times per second
@@ -98,10 +105,10 @@ void Game::Update() {
 	}
 }
 
-/****************************************************/
-/* Render Function									*/
-/* Draw world and snake in our window				*/
-/****************************************************/
+/*
+----- Render Function -----
+Draw world and snake in the window
+*/
 void Game::Render() {
 	window.BeginDraw();//Clear window	
 	world.Render(*window.GetRenderWindow());//Pass the reference of the window to the World class to draw its content

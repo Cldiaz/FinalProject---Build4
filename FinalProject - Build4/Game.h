@@ -3,12 +3,13 @@
 #include "World.h"
 #include "Snake.h"
 #include "Textbox.h"
-/********************************************************************************************************************/
-/*												Game Class Header													*/
-/* Game loop content includes processing input, updating the game world and the player and rendering				*/
-/* everything on the screen. This class will help to roganize and refractor all these processes.					*/
-/* The class holds an instance of Window class, Snake oject	and World object										*/
-/********************************************************************************************************************/
+
+/*
+----- Game Class Header -----
+Game loop content includes processing input, updating the game world and the player and rendering
+everything on the screen. This class will help to roganize and refractor all these processes.
+The class holds an instance of Window class, Snake oject	and World object
+*/
 class Game {
 public:
 	//Default Constructor

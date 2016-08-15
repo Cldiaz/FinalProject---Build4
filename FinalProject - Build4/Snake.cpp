@@ -1,17 +1,19 @@
 #include "Snake.h"
-/********************************************************************************************************************/
-/*												Snake Class Functions												*/
-/* The Snake class contains the direction towards it is moving, the number of lives it has, keep track of the score	*/
-/* after eating an applePosition, the speed, wheter the snake has lost (hitting the wall) or not, and the			*/
-/* physical shape which is a rectangle that represents evry segment of the snake.									*/
-/********************************************************************************************************************/
 
-/****************************************************/
-/* Constructor										*/
-/* Takes an integer as an argumetn which represents	*/
-/* the size of our graphics.						*/
-/* 	@param blockSize  Size of block					*/
-/****************************************************/
+/*
+----- Snake Class Functions -----
+The Snake class contains the direction towards it is moving, the number of lives it has, keep track of the score
+after eating an applePosition, the speed, wheter the snake has lost (hitting the wall) or not,
+and the physical shape which is a rectangle that represents every segment of the snake
+*/
+
+/*
+----- Constructor -----
+Takes an integer as an argumetn which represents
+the size of our graphics.
+@param blockSize  Size of block	
+@param log  Pointer of textbox object
+*/
 Snake::Snake(int blockSize, Textbox* log) {
 	logTextbox = log;
 	//Store the size of block
@@ -29,100 +31,103 @@ Snake::Snake(int blockSize, Textbox* log) {
 	Reset();
 }
 
-/****************************************************/
-/* Deconstructor									*/
-/****************************************************/
+/*
+----- Deconstructor -----
+*/
 Snake::~Snake() {}
 
-/****************************************************/
-/* SetDirection Function							*/
-/* Set the direction to which the snake should move	*/
-/* @param l_dir Direction snake should move next.	*/
-/****************************************************/
-void Snake::SetDirection(Direction l_dir) {
+/*
+----- Update Function -----
+Set the direction to which the snake should move
+@param dir Direction snake should move next.
+*/
+void Snake::SetDirection(Direction dir) {
 	//Set the direction memeber to the direction user selected
-	direction = l_dir;
+	direction = dir;
 }
 
-/****************************************************/
-/* GetDirection Function							*/
-/* Return the direction the snake is moving.		*/
-/****************************************************/
+/*
+----- GetDirection Function -----
+Return the direction the snake is moving.
+@return direction Direction snake is moving.
+*/
 Direction Snake::GetDirection() {
 	return direction;
 }
 
-/****************************************************/
-/* GetSpeed Function								*/
-/* Return the speed the snake at which				*/
-/* the snake is moving.								*/
-/****************************************************/
+/*
+----- GetSpeed Function -----
+Return the speed the snake at which the snake is moving
+@return speed of the snake is moving
+*/
 int Snake::GetSpeed() {
 	return speed;
 }
 
-/****************************************************/
-/* GetPosition Function								*/
-/* Return the position of the snake (the head)	.	*/
-/****************************************************/
+/*
+----- GetPosition Function -----
+Return the position of the snake (the head)
+@return the position of the snake
+*/
 sf::Vector2i Snake::GetPosition() {
 	return (!snakeBody.empty() ? snakeBody.front().position : sf::Vector2i(1, 1));
 }
 
-/****************************************************/
-/* GetLives Function								*/
-/* Return the lives the snake has.					*/
-/****************************************************/
+/*
+----- GetPosition Function -----
+Return the lives of the player
+@return lives Amount of lives left
+*/
 int Snake::GetLives() {
 	return lives;
 }
 
-/****************************************************/
-/* GetScore Function								*/
-/* Return the score the snake has.					*/
-/****************************************************/
+/*
+----- GetScore Function -----
+Return the score the snake has.
+@return score  The score of the player
+*/
 int Snake::GetScore() {
 	return score;
 }
 
-/****************************************************/
-/* IncreaseScore Function							*/
-/* Increase the score if snake eats an applePosition*/
-/****************************************************/
+/*
+----- IncreaseScore Function -----
+Increase the score if snake eats an applePosition
+*/
 void Snake::IncreaseScore() {
 	logTextbox->Add("You ate an apple. Score: " + std::to_string((long long)score));
 	score += 10;
 }
 
-/****************************************************/
-/* HasLost Function									*/
-/* Return the status of the snake, wheter it lost	*/
-/* or not.											*/
-/****************************************************/
+/*
+----- HasLost Function -----
+Return the status of the snake, wheter it lost or not
+*/
 bool Snake::HasLost() {
 	return lost;
 }
 
-/****************************************************/
-/* Lose Function									*/
-/* Assignt to true the lost variable.				*/
-/****************************************************/
+/*
+----- Lose Function -----
+Assignt to true the lost variable.
+*/
 void Snake::Lose() {
 	lost = true;
 }
 
-/****************************************************/
-/* ToggleLost Function								*/
-/* Toggle to the lost variable.						*/
-/****************************************************/
+/*
+----- ToggleLost Function -----
+Toggle to the lost variable.
+*/
 void Snake::ToggleLost() {
 	lost = !lost;
 }
 
-/****************************************************/
-/* GetPhysicalDirection Function					*/
-/* Get the physical direction of the snake			*/
-/****************************************************/
+/*
+----- GetPhysicalDirection Function -----
+Get the physical direction of the snake
+*/
 Direction Snake::GetPhysicalDirection() {
 	if (snakeBody.size() <= 1) {
 		return Direction::None;
@@ -143,11 +148,11 @@ Direction Snake::GetPhysicalDirection() {
 	return Direction::None;
 }
 
-/****************************************************/
-/* Extend Function									*/
-/* Handles the event when the snake eats an apple	*/
-/* and the snake body needs to be extended			*/
-/****************************************************/
+/*
+----- Extend Function -----
+Handles the event when the snake eats an apple
+and the snake body needs to be extended
+*/
 void Snake::Extend() {
 	if (snakeBody.empty()) { return; }//If  the sanke body is empty, exit
 									  //Reference to the last segment of the snake body, referred in this case as tail_head 
@@ -216,14 +221,14 @@ void Snake::Extend() {
 	}
 }
 
-/****************************************************/
-/* Reset Function									*/
-/* It is called every time a new game begins.		*/
-/* Clears the snake segment vector from previous	*/
-/* game. It will add 3 segmets (default length)		*/
-/* one for the head, one for the actual body,		*/
-/* and one for the tail.							*/
-/****************************************************/
+/*
+----- Reset Function -----
+It is called every time a new game begins. 
+Clears the snake segment vector from previous
+game. It will add 3 segmets (default length)
+one for the head, one for the actual body,
+and one for the tail.
+*/
 void Snake::Reset() {
 	//Clear the body (vector<SnakeSegments>)
 	snakeBody.clear();
@@ -241,14 +246,14 @@ void Snake::Reset() {
 	lost = false;
 }
 
-/****************************************************/
-/* CheckCollision Function							*/
-/* Check if the head makes collision with the body	*/
-/****************************************************/
+/*
+----- CheckCollision Function -----
+Check if the head makes collision with the body
+*/
 void Snake::CheckCollision() {
 	if (snakeBody.size() < 5) { return; }//If the length of the snake is less than 5, no need to check for collision
 	SnakeSegment& head = snakeBody.front();//Reference of the head of the snake since it would be the first one to hit another segment
-										   //Iterate over the snakeBody (vector), skip the head
+	//Iterate over the snakeBody (vector), skip the head
 	for (auto itr = snakeBody.begin() + 1; itr != snakeBody.end(); ++itr)
 	{
 		//If the position of the current iteration (snakeSegment) is the same as the position of the head, there is a collision
@@ -260,10 +265,10 @@ void Snake::CheckCollision() {
 	}
 }
 
-/****************************************************/
-/* Move Function									*/
-/* Move the snake in the world (grid) by one space	*/
-/****************************************************/
+/*
+----- Move Function -----
+Move the snake in the world (grid) by one space
+*/
 void Snake::Move() {
 	//Iterate backwards over the snakeBody (vector), create an "inchworm" effect, for example, segment in position 3 moves to the position of segment 2 and so on until we get to the head.
 	for (int i = snakeBody.size() - 1; i > 0; --i) {
@@ -292,10 +297,10 @@ void Snake::Move() {
 	}
 }
 
-/****************************************************/
-/* Tick Function									*/
-/* Fixed time-step to move and check collision		*/
-/****************************************************/
+/*
+----- Tick Function -----
+Fixed time-step to move and check collision
+*/
 void Snake::Tick() {
 	if (snakeBody.empty()) { return; }//If there's no snake, no need to update
 	if (direction == Direction::None) { return; }//If the snake is not moving, no need to update
@@ -303,11 +308,11 @@ void Snake::Tick() {
 	CheckCollision();//Call CheckCollision()
 }
 
-/****************************************************/
-/* Cut Function										*/
-/* "Cut" the snake in case of collision				*/
-/* @param l_segments Number of segments to remove	*/
-/****************************************************/
+/*
+----- Cut Function -----
+"Cut" the snake in case of collision
+@param segments Number of segments to remove
+*/
 void Snake::Cut(int segments) {
 	//Loop the amount of segments to be removed
 	for (int i = 0; i < segments; ++i) {
@@ -320,11 +325,10 @@ void Snake::Cut(int segments) {
 		+ std::to_string((long long)lives));
 }
 
-/****************************************************/
-/* Render Function									*/
-/* Render the snake to the window					*/
-/* @param window Reference to the window			*/
-/****************************************************/
+/*
+----- Render Function -----
+Render the snake to the window
+*/
 void Snake::Render(sf::RenderWindow& window) {
 	if (snakeBody.empty()) { return; }
 

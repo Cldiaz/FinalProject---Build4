@@ -2,11 +2,11 @@
 #include <SFML/Graphics.hpp>
 #include "Snake.h"
 
-/********************************************************************************************************************/
-/*												World Class Header													*/
-/* The world is where the snake moves, it includes the boundaries to where the snake can go	and is responsible		*/
-/* of respawning the applePosition																					*/
-/********************************************************************************************************************/
+/*
+----- World Class Functions -----
+The world is where the snake moves, it includes the boundaries to where the snake can goand is responsible
+of respawning the apple position.
+*/
 
 class World {
 public:

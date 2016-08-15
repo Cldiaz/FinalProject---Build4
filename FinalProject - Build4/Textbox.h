@@ -6,15 +6,15 @@
 //Define an alias for the vector of MessageContainer, list of messages to print
 using MessageContainer = std::vector<std::string>;
 
-/********************************************************************************************************************/
-/*												Textbox Class Header												*/
-/* The Textbox class allows us to print a series of messages to the screen. When a new message is added, it is		*/
-/* added to the bottom of the older message as the older message moves up.											*/
-/* This textbox displays the foolowing messages for debugging purposes.												*/
-/* - When the player loses a life and how many lives he has															*/
-/* - At the beginning, the starting position of the apple															*/
-/* - The current score of the user																					*/
-/********************************************************************************************************************/
+/*
+----- Textbox Class Header -----
+The Textbox class allows us to print a series of messages to the screen. When a new message is added, it is
+added to the bottom of the older message as the older message moves up.
+This textbox displays the foolowing messages for debugging purposes:
+- When the player loses a life and how many lives he has
+- At the beginning, the starting position of the apple
+- The current score of the user
+*/
 class Textbox {
 public:
 	//Constructors

@@ -3,13 +3,13 @@
 #include "Textbox.h"
 #include <vector>
 
-/****************************************************/
-/* SnakeSegment Structure							*/
-/* Represents a segment of the snake body			*/
-/* Contains a single member, an integer vector		*/
-/* which represents the position of the segment		*/
-/* on the grid.										*/
-/****************************************************/
+/*
+----- SnakeSegment Structure -----
+Represents a segment of the snake body
+of respawning the applePosition.
+Contains a single member, an integer vector
+which represents the position of the segment on the grid.
+*/
 struct SnakeSegment {
 	//Structure constructor, set the position through an initializer list
 	SnakeSegment(int x, int y) : position(x, y) {}
@@ -22,12 +22,12 @@ using SnakeContainer = std::vector<SnakeSegment>;
 //Enumeration defining the possible directions of the snake, also one to indicate is not moving
 enum class Direction { None, Up, Down, Left, Right };
 
-/********************************************************************************************************************/
-/*												Snake Class Functions												*/
-/* The Snake class contains the direction towards it is moving, the number of lives it has, keep track of the score	*/
-/* after eating an applePosition, the speed, wheter the snake has lost (hitting the wall) or not,					*/
-/* and the physical shape which is a rectangle that represents every segment of the snake							*/
-/********************************************************************************************************************/
+/*
+----- Snake Class Header -----
+The Snake class contains the direction towards it is moving, the number of lives it has, keep track of the score
+after eating an applePosition, the speed, wheter the snake has lost (hitting the wall) or not,
+and the physical shape which is a rectangle that represents every segment of the snake
+*/
 class Snake {
 public:
 	//Constructor
@@ -37,7 +37,7 @@ public:
 	~Snake();
 
 	//Set the direction of the snake
-	void SetDirection(Direction l_dir);
+	void SetDirection(Direction dir);
 
 	//Return the direction where the snake is going
 	Direction GetDirection();
